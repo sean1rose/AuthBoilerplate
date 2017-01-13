@@ -24,7 +24,11 @@ If the domain, subdomain and port of browser and server don't match, then the re
 Our example currently -> our domain is localhost, clientside port is 8080, but request was made to a different port (3090)
 Server is going to look at host or origin header, but they're easy to fake!!!
 
-*** HOW TO RESOLVE CORS***
+
+!!!*** HOW TO RESOLVE CORS***!!!
+Main goal: Need to change server side code -> tell it to allow connections from any domain, subdomain, port
+Go inside of top level index.js -> import 'cors' module/middleware
+  -> app.use(cors());
 
 */
 
