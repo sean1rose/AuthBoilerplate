@@ -9,6 +9,18 @@ import {
 
 const ROOT_URL = 'http://localhost:3090';
 
+// ACTION CREATOR handling multiple responsibilities
+  // had been using redux-promise before. But this time, using REDUX THUNK!!!
+export function signinUser( { email, password }) {
+  // submit email/pw to the server
+
+  // if request is valid...
+    // update staet to indicate user is authenticated
+    // save jwt token (so user can make auth requests in the future)
+    // redirect to route '/feature'
+
+  // if request is bad -> show error to user
+}
 export function signinUser({ email, password }) {
   return function(dispatch) {
     // Submit email/password to the server
