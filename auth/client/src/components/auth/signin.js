@@ -12,6 +12,8 @@ import * as actions from '../../actions';
 class Signin extends Component {
   handleFormSubmit({ email, password }) {
     // Need to do something to log user in
+    
+    // this is the action creator. pass in email and pw (SEE ACTION CREATORS)
     this.props.signinUser({ email, password });
   }
 
@@ -49,6 +51,8 @@ function mapStateToProps(state) {
   return { errorMessage: state.auth.error };
 }
 
+// reduxform helper works similarly to connect helper
+  // pass in actions variable as 3rd argument to reduxform, so get access to action creators as props
 export default reduxForm({
   form: 'signin',
   fields: ['email', 'password']

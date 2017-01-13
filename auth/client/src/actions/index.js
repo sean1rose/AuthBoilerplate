@@ -1,3 +1,10 @@
+// ACTION CREATORS (USING REDUX THUNK)
+  // REDUX THUNK IS A MIDDLEWARE Module - allows us to return a function (rather than an action/object) from our action creator; that func giving us access to dispatch method
+    // ***dispatch method accepts an action and forwards it to reducers 
+    // Dispatch is the main pipeline of redux
+    // redux-thunk allows us to dispatch MULTIPLE diff actions from w/in a single action creator (not limited to 1)
+      // see signinUser func below - there's multiple responsibilities...
+    // middleware must add it when creating store (in index.js)
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 import {
@@ -7,20 +14,34 @@ import {
   FETCH_MESSAGE
 } from './types';
 
+// url of API server... (this is the API we are pinging and making post requests to, here on the client side)
 const ROOT_URL = 'http://localhost:3090';
 
+
+/*
 // ACTION CREATOR handling multiple responsibilities
   // had been using redux-promise before. But this time, using REDUX THUNK!!!
-export function signinUser( { email, password }) {
-  // submit email/pw to the server
+    // REDUX THUNK is a middleware func that gives direct access to DISPATCH (dispatch makes sure the action gets sent to all reducers)
+export function signinUser1( { email, password }) {
+  //****instead of returning an object, redux-thunk allows our action creator to return a FUNCTION (which gives us access to dispatch method)
+  return function(dispatch) {
+    // can make async request here and at any pt in future can call dispatch.method and pass in action
+    // redux thunk gives us access to dispatch func allowing us to dispatch our own actions at any time
 
-  // if request is valid...
-    // update staet to indicate user is authenticated
-    // save jwt token (so user can make auth requests in the future)
-    // redirect to route '/feature'
-
-  // if request is bad -> show error to user
+    // ***submit email/pw to the server (not webpack server, but our API server handling our auth logic) *** make sure to start api server up!!!!****
+      // making ajax request to api server, which is hosted on port 3090
+      // 1st arg: posting to route we created on sever side api (check server/router.js -> we made a post route handler for signin)
+      // 2nd arg: data we're posting to the end point (email + pw) ==> {email: email, password: password}
+    axios.post(`${ROOT_URL}/signin`, { email, password })
+    // if request is valid...
+      // update staet to indicate user is authenticated
+      // save jwt token (so user can make auth requests in the future)
+      // redirect to route '/feature'
+    // if request is bad -> show error to user
+  }
 }
+*/
+
 export function signinUser({ email, password }) {
   return function(dispatch) {
     // Submit email/password to the server
