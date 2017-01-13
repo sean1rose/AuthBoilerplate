@@ -18,6 +18,17 @@ import {
 const ROOT_URL = 'http://localhost:3090';
 
 
+/*        !!!!***CORS***!!!!
+POST REQUEST from origin localhost:8080 made to API at localhost:3090 (if u check network request, headers tab -> check "Host" and "Origin")
+If the domain, subdomain and port of browser and server don't match, then the request will be denied UNLESS the SERVER allows it
+Our example currently -> our domain is localhost, clientside port is 8080, but request was made to a different port (3090)
+Server is going to look at host or origin header, but they're easy to fake!!!
+
+*** HOW TO RESOLVE CORS***
+
+*/
+
+
 /*
 // ACTION CREATOR handling multiple responsibilities
   // had been using redux-promise before. But this time, using REDUX THUNK!!!
