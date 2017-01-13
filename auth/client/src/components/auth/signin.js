@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
+// AUTH FLOW handled in action creator (1 action creator results in several different changes)...
+// when user submits form w/ email/pw... (will use an AC to handle request)
+  // action creator submits to our server
+    // server determines if valid
+      //  yes valid successful authentication -> [3 things]: server returns jwt + redirect user to /feature (protected route) + save token
+      // not correct -> show an error message
+
 class Signin extends Component {
   handleFormSubmit({ email, password }) {
     // Need to do something to log user in
