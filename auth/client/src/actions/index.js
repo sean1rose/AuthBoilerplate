@@ -7,6 +7,7 @@
     // middleware must add it when creating store (in index.js)
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+// browser history communicates info about the url to react-router, can alaso use it to make changes to the url
 import {
   AUTH_USER,
   UNAUTH_USER,
@@ -27,13 +28,14 @@ Server is going to look at host or origin header, but they're easy to fake!!!
 
 !!!*** HOW TO RESOLVE CORS***!!!
 Main goal: Need to change server side code -> tell it to allow connections from any domain, subdomain, port
+SOLUTION: ENABLE CORS ON API SERVER
 Go inside of top level index.js -> import 'cors' module/middleware
   -> app.use(cors());
 
 */
 
 
-/*
+
 // ACTION CREATOR handling multiple responsibilities
   // had been using redux-promise before. But this time, using REDUX THUNK!!!
     // REDUX THUNK is a middleware func that gives direct access to DISPATCH (dispatch makes sure the action gets sent to all reducers)
@@ -48,14 +50,24 @@ export function signinUser1( { email, password }) {
       // 1st arg: posting to route we created on sever side api (check server/router.js -> we made a post route handler for signin)
       // 2nd arg: data we're posting to the end point (email + pw) ==> {email: email, password: password}
     axios.post(`${ROOT_URL}/signin`, { email, password })
-    // if request is valid...
-      // update staet to indicate user is authenticated
-      // save jwt token (so user can make auth requests in the future)
-      // redirect to route '/feature'
-    // if request is bad -> show error to user
+      .then(res => {
+        // if request is valid...
+          // 1. update state to indicate user is authenticated by dispatch state
+          dispatch({ type: AUTH_USER });
+          // 2. save jwt token (so user can make auth requests in the future)
+          localStorage.setItem('token', response.data.token);
+
+          // 3. redirect to route '/feature' using react router (not a total reload of the page) / just swap out the views...
+          browserHistory.push('/feature');
+
+      })
+      .catch(() => {
+        // if request is bad -> show error to user
+        dispatch(authError('Bad login info'));
+      })
   }
 }
-*/
+
 
 export function signinUser({ email, password }) {
   return function(dispatch) {
