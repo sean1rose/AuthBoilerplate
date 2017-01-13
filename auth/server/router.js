@@ -28,7 +28,7 @@ module.exports = function(app) {
   // route handler for root route -> when user goes to '/', handler sends user to requireAuth Middleware first -> if get thru that then run callback func
     // so if tried to reach w/o token, wouldn't work (need to authorize and receice JWT first)...
   app.get('/', requireAuth, function(req, res) {
-    res.send({ hi: 'there' });
+    res.send({ message: 'Super secret code is ABC123' });
   })
   
   // b4 user can go to signin route handler, must pass thru middleware and be authenticated 1st (verify that they supplied correct username and pw using localstrategy that we created)...

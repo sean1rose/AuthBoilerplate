@@ -14,6 +14,11 @@ const router = require('./router');
 
 const mongoose = require('mongoose');
 // DB Setup - tell mongoose to hook up to instance of mongodb
+
+const cors = require('cors');
+// import cors middleware
+
+
 mongoose.connect('mongodb://localhost:auth/auth');
 // creates a new db inside of mongodb called auth
 
@@ -24,6 +29,11 @@ mongoose.connect('mongodb://localhost:auth/auth');
 app.use(morgan('combined'));
 // morgan and bodyparser -> express middleware
   // any incoming request will be passed into both 1st
+
+// cors middleware (could even pass in options to allow for requests for certain domains)
+app.use(cors());
+// ***ALLOW FOR CORS!!!
+
 // bodyparser is used to parse incoming requests into json (no matter the request type)
 app.use(bodyParser.json({ type: '*/*' }));
 // router is imported from separate file (route handler)
