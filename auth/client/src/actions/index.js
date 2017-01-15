@@ -15,6 +15,8 @@ import {
   FETCH_MESSAGE
 } from './types';
 
+// i've got a stomach ache
+
 // url of API server... (this is the API we are pinging and making post requests to, here on the client side)
 const ROOT_URL = 'http://localhost:3090';
 
